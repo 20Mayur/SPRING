@@ -18,7 +18,7 @@ import com.Springboot.MySql.Dao.EmailRepository;
 import com.Springboot.MySql.Entities.Notification;
 import com.Springboot.MySql.Entities.Status;
 
-import jakarta.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage;
 
 
 public class EmailSender implements Callable<Boolean>{

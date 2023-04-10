@@ -1,6 +1,7 @@
 package com.Springboot.MySql.Authe;
 import lombok.RequiredArgsConstructor;
 
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,13 +25,13 @@ public class AuthService {
 	//register
 	public AuthResponse register(RegisterRequest request) {
 		// TODO Auto-generated method stub
-		var user = CourseModel.builder()
+		CourseModel user = CourseModel.builder()
 				.email(request.getEmail())
 				.password(passwordEncoder.encode(request.getPassword())) 
 				.role(Role.User)
 		        .build();
 		Repository.save(user);
-		var jwtToken = jwtService.generateToken(user);
+		String jwtToken = jwtService.generateToken(user);
 		 return AuthResponse.builder()
 			        .token(jwtToken)
 			        .build();
@@ -40,9 +41,9 @@ public class AuthService {
 		// TODO Auto-generated method stub
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-		var user= Repository.findByEmail(request.getEmail())
-				.orElseThrow();
-		var jwtToken = jwtService.generateToken(user);
+		CourseModel user= Repository.findByEmail(request.getEmail()).orElseThrow();
+				
+		String jwtToken = jwtService.generateToken(user);
 		 return AuthResponse.builder()
 			        .token(jwtToken)
 			        .build();

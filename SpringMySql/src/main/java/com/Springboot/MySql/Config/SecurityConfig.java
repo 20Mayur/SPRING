@@ -20,7 +20,7 @@ public class SecurityConfig {
 
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-	public static final String []PERMIT_URLS = { "/api/v1/auth/**","/v3/api-docs","/v2/api-docs","/swagger-resources/**","/webjars/**",
+	public static final String []PERMIT_URLS = { "/api/v1/auth/**","/v3/api-docs/**","/v2/api-docs/**","/swagger-resources/**","/webjars/**",
 	"/swagger-ui/**"};
 	
 	@Bean
@@ -29,7 +29,8 @@ public class SecurityConfig {
 	        .csrf()
 	        .disable()
 	        .authorizeHttpRequests()
-	        .requestMatchers("/api/v1/auth/**")
+	        .antMatchers("/api/v1/auth/**","/v3/api-docs/**","/v2/api-docs/**","/swagger-resources/**","/webjars/**",
+	        		"/swagger-ui/**")
 	        .permitAll()
 	        .anyRequest()
 	        .authenticated()
